@@ -19,6 +19,11 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
+    path: 'nlp',
+    loadChildren: () => import('./nlp/nlp.module')
+      .then(m => m.NLPModule),
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },
