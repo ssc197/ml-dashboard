@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
-import {   FormBuilder,
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NgForm,
-  Validators} from '@angular/forms'
 import { HttpClient} from '@angular/common/http';
 
 @Component({
@@ -16,20 +9,24 @@ import { HttpClient} from '@angular/common/http';
 })
 
 export class TextblobSentimentsComponent implements OnInit {
-  SERVER_URL = "http://3.15.28.219:8080/sentiment-analysis";
-  sentimentForm: FormGroup;
-  constructor(private http: HttpClient,
-    private formBuilder: FormBuilder,
+  SERVER_URL = "http://13.232.12.140:8080/sentiment-analysis";
+  formData = {
+    analysis_query :""
+
+  }
+  constructor(
+    private http: HttpClient,
+    // private formBuilder: FormBuilder,
     ) { }
   Sentiments = '';
   Emoji = '';
   ngOnInit(): void {
     
-    this.sentimentForm = this.formBuilder.group({
-      analysis_query: new FormControl("", [
-        Validators.required
-      ]),
-    });
+    // this.sentimentForm = this.formBuilder.group({ 13.232.12.140:8080
+    //   analysis_query: new FormControl("", [
+    //     Validators.required
+    //   ]),
+    // });
   }
   
   // get g() {
@@ -38,9 +35,8 @@ export class TextblobSentimentsComponent implements OnInit {
 
 
   onSubmit(){
-    const formData = new FormData();
-    formData.append('analysis_query', this.sentimentForm.get('analysis_query').value);
-    this.http.post<any>(this.SERVER_URL, formData).subscribe(
+    console.log(this.formData)
+    this.http.post<any>(this.SERVER_URL, this.formData).subscribe(
       (res) => {
         // console.log(res)
         if(res.sentiment == -1){
@@ -60,10 +56,5 @@ export class TextblobSentimentsComponent implements OnInit {
   }
 
 
-  toggleEvent(){
-    // console.log('changes')
-    this.sentimentForm.reset();
-    this.Sentiments = "";
-    this.Emoji= '';
-  }
+
 }

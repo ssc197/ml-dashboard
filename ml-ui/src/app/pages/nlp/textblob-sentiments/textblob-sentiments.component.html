@@ -1,10 +1,16 @@
 <div class="row">
   <div class="col-md-12">
     <nb-card class="inline-form-card">
+      <nb-card-header>Enter you sentiments</nb-card-header>
+
       <nb-card-body>
-        <form class="form-inline" [formGroup] = "sentimentForm" (ngSubmit)="onSubmit()">
-          <input type="text" nbInput fullWidth placeholder="Jane Doe"  formControlName="analysis_query"  name="analysis_query">
-          <button type="submit" nbButton status="primary">Submit</button>
+        <form>
+          <div class="form-group">
+            <input type="text" nbInput fullWidth placeholder="Jane Doe"   [(ngModel)]="formData.analysis_query"  name="analysis_query">
+          </div>
+ 
+          <button type="submit" nbButton status="primary" (click)="onSubmit()">Submit</button>
+
         </form>
         <div class="row">
           <div class="col-md-12 text-center">
