@@ -1,16 +1,22 @@
 <div class="row">
   <div class="col-md-12">
     <nb-card class="inline-form-card">
-      <nb-card-header>Enter you sentiments</nb-card-header>
+      <nb-card-header>Enter text to analyze your sentiments</nb-card-header>
 
       <nb-card-body>
-        <form>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate> 
           <div class="form-group">
-            <input type="text" nbInput fullWidth placeholder="Jane Doe"   [(ngModel)]="formData.analysis_query"  name="analysis_query">
+            <textarea type="text" row="3"  nbInput fullWidth name="analysis_query" placeholder="Enter you data"    [(ngModel)]="formData.analysis_query"  #analysis_query="ngModel" [ngClass]="{ 'status-danger': f.submitted && analysis_query.invalid }" required style="resize: none;"></textarea>
+            <div *ngIf="f.submitted && analysis_query.invalid" class="invalid-feedback">
+              <div *ngIf="analysis_query.errors.required">First Name is required</div>
           </div>
- 
-          <button type="submit" nbButton status="primary" (click)="onSubmit()">Submit</button>
-
+          </div>
+          <div class="form-group">
+            <div class="text-center">
+              <button type="submit" nbButton status="primary" >Submit</button>
+            </div>
+          
+            </div>
         </form>
         <div class="row">
           <div class="col-md-12 text-center">
