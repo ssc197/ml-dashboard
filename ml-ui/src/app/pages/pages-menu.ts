@@ -13,6 +13,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Sentiment Analysis-TextBlob',
         link: '/pages/nlp/textblob',
+      },
+      {
+        title: 'Topic Modelling - Google Scrap',
+        link: '/pages/nlp/topic-modelling',
       }
     ],
   },

@@ -1,0 +1,37 @@
+<div class="row topic-modelling">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header>Enter text to analyze your sentiments</nb-card-header>
+      <!-- <nb-search type="rotate-layout" tag="rotate-layout"></nb-search> -->
+      <nb-card-body>
+        <form
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm" 
+          class="form-inline"
+          novalidate
+        >
+            <input
+              type="search"
+              nbInput
+              fullWidth
+              name="search_query"
+              placeholder="Enter you data"
+              [(ngModel)]="formData.search_query"
+              #search_query="ngModel"
+              [ngClass]="{
+                'status-danger': f.submitted && search_query.invalid
+              }"
+              required
+            />
+              <button nbButton type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+        </form>
+        <div *ngIf="show_graph">
+          <img [src]='graph' alt="Chart" height="500" width="100%" />
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

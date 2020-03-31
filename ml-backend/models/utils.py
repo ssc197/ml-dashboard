@@ -1,4 +1,3 @@
-
 from bs4 import BeautifulSoup
 from unidecode import unidecode
 import re
@@ -104,6 +103,23 @@ SMILEY = {
     '%-P' :  'tongue rolleye',
     ';-P' :  'tongue wink'
 }
+
+def decontracted(phrase):
+    # specific
+    phrase = re.sub(r"won\'t", "will not", phrase)
+    phrase = re.sub(r"can\'t", "can not", phrase)
+
+    # general
+    phrase = re.sub(r"n\'t", " not", phrase)
+    phrase = re.sub(r"\'re", " are", phrase)
+    phrase = re.sub(r"\'s", " is", phrase)
+    phrase = re.sub(r"\'d", " would", phrase)
+    phrase = re.sub(r"\'ll", " will", phrase)
+    phrase = re.sub(r"\'t", " not", phrase)
+    phrase = re.sub(r"\'ve", " have", phrase)
+    phrase = re.sub(r"\'m", " am", phrase)
+    return phrase
+    
 def remove_pattern (input_txt , pattern):
     r = re.findall(pattern, str(input_txt))
     print(r)
@@ -142,6 +158,7 @@ def tokenizeData(_data):
     _data= nltk.word_tokenize(_data)
     _data = [word for word in _data if len(word) > 2]
     _data = [word for word in _data if word not in stuff_to_be_removed]
+    _data = [decontracted(p) for p in _data]
     
     # lemmatizing words
     lamme = WordNetLemmatizer()
